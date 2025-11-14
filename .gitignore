@@ -144,3 +144,6 @@ __pycache__/
 
 # IDE
 .idea/
+
+# Frontend 
+.vscode/
