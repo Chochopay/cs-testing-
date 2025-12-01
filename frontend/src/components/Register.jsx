@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function RegistrationForm({setPage}){
+export default function RegistrationForm({setPage, formRole, setFormRole}){
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -75,7 +75,7 @@ export default function RegistrationForm({setPage}){
                         <p> Уже есть аккаунт? </p>
                         <a onClick={() => setPage("login")}> Войти </a>
                     </div>
-
+                    <button onClick={() => setPage("createtest")}>Временно</button>
                 </div>
             </form>
         </main>
