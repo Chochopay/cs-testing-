@@ -5,7 +5,7 @@ export default function InformationPage(){
         <>
 
             <main>
-
+                hello
             </main>
             
             <footer>
