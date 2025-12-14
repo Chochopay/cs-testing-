@@ -1,6 +1,9 @@
 import { useState } from "react";
+import {useUser} from "../UserContext"
 
 export default function CreateTest() {
+    const {user} = useUser()
+
     const [createForm, setCreateForm] = useState(false);
 
     const [test, setTest] = useState({
@@ -95,6 +98,11 @@ export default function CreateTest() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!user){
+            alert("Вы не зарегистрированы")
+            return
+        }
+
         if (!test.title || test.title.trim() === "") {
             alert("Название теста обязательно");
             return;
@@ -131,19 +139,35 @@ export default function CreateTest() {
                 }
             }
         }
+        const testData = {
+            ...test,
+            author_id: user.id
+        }
 
         try{
-            const response = await fetch("", {
+            const response = await fetch("http://127.0.0.1:8000/test/create", {
                 method: "POST",
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body: JSON.stringify(test)
+                body: JSON.stringify(testData)
             });
 
-            
+            if (!response.ok) {
+                const errorData = await response.json();
+                alert(errorData.detail || "Ошибка запроса");
+                return;
+            }
 
-        } catch (error) {
+            const data = await response.json();
+            alert("Тест успешно создан")
+            setTest({ title: "", questions: [] });
+            setCurrentQuestion(0);
+            setNewQuestionText("");
+            setOptionText("");
+            setCreateForm(false);
+
+        }catch (error) {
             console.log("Произошла ошибка:", error);
             alert("Сетевая ошибка, попробуйте ещё раз");
         }
@@ -187,7 +211,7 @@ export default function CreateTest() {
                                 <button className="m-2 top-0 right-0" onClick={() => deleteQuestion(currentQuestion)}> delete</button>
 
                                 <h3 className="font-semibold">
-                                    Вопрос {currentQuestion + 1}: {question.text}
+                                    Вопрос {currentQuestion + 1}) {question.text}
                                 </h3>
 
                                 <div className="text-sm text-gray-700 mt-2 ml-2">
@@ -219,7 +243,7 @@ export default function CreateTest() {
                         </div>
                     </div>
 
-                    <button type="submit">Сохранить тест</button>
+                    <button type="button" onClick={handleSubmit} disabled={!user || !test.title || test.questions.length === 0}>Сохранить тест</button>
                 </div>
             )}
 

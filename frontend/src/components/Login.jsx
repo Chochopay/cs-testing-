@@ -52,7 +52,7 @@ export default function LoginForm({setPage, setFormRole}) {
                 console.log(data.detail || "Ошибка при входе")
                 alert(data.detail || "Ошибка при входе")
             }
-
+            
 
         }catch(error){
             console.log("Произошла ошибка", error)

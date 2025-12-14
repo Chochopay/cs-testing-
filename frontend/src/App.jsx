@@ -3,6 +3,7 @@ import LoginForm from "./components/Login";
 import CreateTest from "./components/Createtest";
 import InformationPage from "./components/Inf"
 import ProfilePage from "./components/Profile"
+import PublicTests from "./components/PublicTest"
 import { useState } from "react";
 import {useUser} from "./UserContext"
 
@@ -23,7 +24,7 @@ export default function App(){
                         Главная
                     </button>
 
-                    <button>
+                    <button onClick={() => setPage("publictest")}>
                         Тесты
                     </button>
 
@@ -44,6 +45,7 @@ export default function App(){
                 {page === "createtest" && <CreateTest />}
                 {page === "main" && <InformationPage />} 
                 {page === "profile" && <ProfilePage />}
+                {page === "publictest" && <PublicTests />}
             </main>        
         </>
     )
