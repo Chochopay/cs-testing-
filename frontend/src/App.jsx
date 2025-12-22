@@ -21,7 +21,7 @@ export default function App(){
     return(
         <>
             {showHeader && (
-                <header className="flex flex-row justify-around fixed bottom-0 left-0 w-screen border p-6 bg-b400">
+                <header className="flex flex-row justify-around fixed bottom-0 left-0 w-screen p-7 bg-v400 text-v500 font-bold">
                     <button onClick={() => setPage("main")}>
                         Главная
                     </button>

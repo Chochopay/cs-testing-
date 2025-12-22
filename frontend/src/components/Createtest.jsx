@@ -166,12 +166,12 @@ export default function CreateTest() {
     const filterTests = tests.filter((test) => test.title.toLowerCase().includes(search.toLowerCase()));
 
     return (
-        <main className="flex items-center justify-center w-screen h-screen">
+        <main className="flex items-center justify-center w-screen h-screen bg-v200">
             <div className="flex flex-col text-center absolute top-0 mt-3">
-                <h3>Мои тесты</h3>
+                <h3 className="font-bold text-2xl text-v500">Мои тесты</h3>
                 <input
                     type="text"
-                    className="border mt-3"
+                    className="border-2 border-v400  mt-3 rounded-xl p-1 pl-2 bg-v100 focus:outline-none  "
                     placeholder="Найти тест"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
@@ -195,15 +195,15 @@ export default function CreateTest() {
             </div>
 
             {createForm && (
-                <div className="flex flex-col p-4 border rounded w-[600px] absolute">
+                <div className="flex flex-col p-4 border-4 rounded-xl border-v400 bg-v300 w-2/5 absolute text-v500 font-semibold">
                     <div className="flex flex-row justify-between mb-4">
-                        <h2 className="text-xl font-bold">Создать тест</h2>
+                        <h2 className="text-xl font-bold text-v500">Создать тест</h2>
                         <button onClick={() => setCreateForm(false)}>Закрыть</button>
                     </div>
 
                     <input
                         type="text"
-                        className="border p-2 mb-3"
+                        className="bg-v200 rounded-lg p-2 mb-3 focus:outline-none"
                         placeholder="Название теста"
                         value={test.title}
                         onChange={(e) => setTest((prev) => ({ ...prev, title: e.target.value }))}
@@ -211,7 +211,7 @@ export default function CreateTest() {
 
                     <input
                         type="text"
-                        className="border p-2 mb-3"
+                        className="bg-v200 rounded-lg p-2 mb-3 focus:outline-none"
                         placeholder="Введите текст вопроса и нажмите Enter"
                         value={newQuestionText}
                         onChange={(e) => setNewQuestionText(e.target.value)}
@@ -224,8 +224,8 @@ export default function CreateTest() {
                     />
 
                     {question && (
-                        <div key={currentQuestion} className="border p-3 rounded mb-3">
-                            <button className="m-2" onClick={() => deleteQuestion(currentQuestion)}>
+                        <div key={currentQuestion} className="border p-3 rounded mb-3 font-semibold text-v500 ">
+                            <button className="m-2 font-bold" onClick={() => deleteQuestion(currentQuestion)}>
                                 delete
                             </button>
                             <h3 className="font-semibold">
@@ -234,7 +234,7 @@ export default function CreateTest() {
 
                             <div className="text-sm text-gray-700 mt-2 ml-2">
                                 {question.options.map((option, optionIndex) => (
-                                    <div key={optionIndex} className="flex items-center m-2 relative border">
+                                    <div key={optionIndex} className="flex items-center m-2 relative rounded-lg bg-v200">
                                         <input
                                             type="radio"
                                             name={`question-${currentQuestion}`}
@@ -242,10 +242,10 @@ export default function CreateTest() {
                                             onChange={() => setCorrectOption(currentQuestion, optionIndex)}
                                             className="m-2"
                                         />
-                                        <span className="block w-[80%] break-words">{option.text}</span>
+                                        <span className="block w-[80%] break-words font-normal text-v500">{option.text}</span>
                                         <button
                                             onClick={() => deleteOption(currentQuestion, optionIndex)}
-                                            className="absolute right-2 -translate-y-1/2 top-1/2"
+                                            className="absolute right-2 -translate-y-1/2 top-1/2 font-bold text-v500"
                                         >
                                             del
                                         </button>
@@ -253,7 +253,7 @@ export default function CreateTest() {
                                 ))}
                                 <input
                                     type="text"
-                                    className="border p-1 mt-2"
+                                    className="bg-v200 rounded-lg p-2 border border-v500 mt-2 focus:outline-none"
                                     placeholder="Добавить вариант"
                                     value={optionText}
                                     onChange={(e) => setOptionText(e.target.value)}
@@ -268,13 +268,9 @@ export default function CreateTest() {
                         </div>
                     )}
 
-                    <div className="flex mb-2">
-                        <button onClick={() => setCurrentQuestion((prev) => Math.max(prev - 1, 0))}>Назад</button>
-                        <button
-                            onClick={() => setCurrentQuestion((prev) => Math.min(prev + 1, test.questions.length - 1))}
-                        >
-                            Вперед
-                        </button>
+                    <div className="flex mb-2 w-full justify-center p-2">
+                        <button className="rounded-bl-full rounded-tl-full mr-1 bg-v500 p-2 text-v200 w-1/6" onClick={() => setCurrentQuestion((prev) => Math.max(prev - 1, 0))}>Назад</button>
+                        <button className="rounded-br-full rounded-tr-full ml-1 bg-v500 p-2 text-v200 w-1/6" onClick={() => setCurrentQuestion((prev) => Math.min(prev + 1, test.questions.length - 1))}>Вперед</button>
                     </div>
 
                     <button

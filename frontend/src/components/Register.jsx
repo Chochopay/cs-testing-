@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {useUser} from "../UserContext"
-
 export default function RegistrationForm({ setPage}) {
     const {setUser} = useUser()
 
@@ -108,9 +107,9 @@ export default function RegistrationForm({ setPage}) {
 
                     <button type="submit" className="mt-7 text-v500 duration-150 hover:scale-105 active:scale-100 hover:bg-v500 hover:text-v200 rounded-xl p-2 m-2"> Зарегистрироваться </button>
 
-                    <div className="flex flex-row mt-3 justify-center w-full">
+                    <div className="flex flex-row mt-3 justify-center w-full text-v500">
                         <p > Уже есть аккаунт? </p>
-                        <button type="button" className="ml-5" onClick={() => setPage("login")}> Войти </button>
+                        <button type="button" className="ml-5 font-bold" onClick={() => setPage("login")}> Войти </button>
                     </div>
                 </div>
             </form>

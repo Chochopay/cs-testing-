@@ -89,42 +89,42 @@ export default function TakeTest({testId, setPage}) {
     const question = test?.questions[currentQuestion]
 
     return (
-        <main className="w-screen h-screen flex justify-center items-center">
-            <button className="absolute left-4 top-2" onClick={() => setPage("publictest")}>Назад</button>
+        <main className="w-screen h-screen flex justify-center items-center bg-v200">
+            <button className="absolute left-4 top-2 border-2 rounded-xl m-2 p-2 border-v500 text-v500 font-bold duration-200 transition-all hover:scale-105 hover:bg-v500 hover:text-v200" onClick={() => setPage("publictest")}>Назад</button>
 
             {loading ? (<p>Загрузка...</p>) : (
-                <div className="flex flex-col border w-1/3 h-3/5 text-center justify-between items-center" >
+                <div className="flex flex-col w-1/3 h-3/5 text-center justify-between items-center rounded-xl bg-v300" >
                     {test && question && (
                         <div className="flex flex-col mt-4  w-full h-2/5">
-                            <h3 className="m-2">Вопрос {currentQuestion + 1} из {test?.questions?.length || 0}</h3>
-                            <p>{question.text}</p>
+                            <h3 className="m-2 text-xl font-semibold text-v500">Вопрос {currentQuestion + 1} из {test?.questions?.length || 0}</h3>
+                            <p className="font-semibold text-v500">{question.text}</p>
                         </div>
                     )}
-                    <div className="flex flex-col w-full h-full items-start border justify-center ">
+                    <div className="flex flex-col w-full h-full items-start justify-center p-3">
                         {question?.options?.map((option) => (
-                            <label key={option.id} className="m-2  w-14/15 flex p-2 border" >
+                            <label key={option.id} className="mb-2 w-full flex p-2 rounded-xl text-v500 bg-v200" >
                                 <input type="radio" name={`question-${currentQuestion}`} checked={answers[currentQuestion] === option.id} onChange={() => selectOption(currentQuestion, option.id)} 
-                                    className="m-2"/>
+                                    className="m-2 focus:outline-none"/>
                                 <span>{option.text}</span>
                             </label>
                                 ))}
                     </div>
-                    <div className="flex w-full border justify-center">
-                        <button className="m-2" onClick={() => setCurrentQuestion(prev => Math.max(prev - 1, 0))}> Назад </button>
+                    <div className="flex w-full justify-center">
+                        <button className="p-3 bg-v300 rounded-bl-full rounded-tl-full m-1 text-v500 font-semibold hover:bg-v500 hover:text-v200 duration-200 transition-all w-1/5" onClick={() => setCurrentQuestion(prev => Math.max(prev - 1, 0))}> Назад </button>
                         {currentQuestion < test?.questions?.length - 1 ? (
-                            <button onClick={() => setCurrentQuestion(prev => Math.min(prev + 1, test?.questions?.length - 1))}>Вперед</button>
+                            <button className="p-3 bg-v300 rounded-br-full rounded-tr-full m-1 text-v500 font-semibold hover:bg-v500 hover:text-v200 duration-200 transition-all w-1/5" onClick={() => setCurrentQuestion(prev => Math.min(prev + 1, test?.questions?.length - 1))}>Вперед</button>
                         ) : (
-                            <button className="" onClick={handleSubmit} disabled={answers.some(p => p === null)}>Завершить</button>
-                        )}
+                            <button className="p-3 bg-v300 rounded-br-full rounded-tr-full m-1 text-v500 font-semibold hover:bg-v500 hover:text-v200 duration-200 transition-all w-1/5" onClick={handleSubmit} disabled={answers.some(p => p === null)}>Завершить</button>
+                        )} 
                     </div>
                 </div>
             )}
             {result && (
                 <div className="flex justify-center items-center fixed z-100 inset-0 w-screen h-screen bg-black/50 ">
-                    <div className="flex flex-col bg-white w-1/3 h-1/3 text-center justify-around items-center rounded border border-3">
-                        <h3 className="font-bold ">Ваш результат</h3>
-                        <p>Вы ответили правильно на {result?.score} вопросов из {result?.total} </p>
-                        <button type="button" className="w-1/3 border rounded " onClick= {() =>setPage("publictest")}>Выйти</button>
+                    <div className="flex flex-col bg-v400 w-2/5 rounded-2xl h-3/10 text-center justify-around items-center rounded border-3 border-v500">
+                        <h3 className="font-bold text-v500">Ваш результат</h3>
+                        <p className="font-bold text-v500">Вы ответили правильно на {result?.score} вопросов из {result?.total} </p>
+                        <button type="button" className="w-1/3 border-2 rounded-xl p-1 text-v500 bg-v300" onClick= {() =>setPage("publictest")}>Выйти</button>
                     </div>
                 </div>
             )}
