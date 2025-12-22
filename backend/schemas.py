@@ -1,4 +1,3 @@
-from fastapi.openapi.models import Schema
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
 
