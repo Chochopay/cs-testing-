@@ -4,12 +4,14 @@ import CreateTest from "./components/Createtest";
 import InformationPage from "./components/Inf"
 import ProfilePage from "./components/Profile"
 import PublicTests from "./components/PublicTest"
+import TakeTest from "./components/TakeTest"
 import { useState } from "react";
 import {useUser} from "./UserContext"
 
 export default function App(){
     const {user} = useUser()
 
+    const [selectedId, setSelectedId] = useState(null)
     const [page, setPage] = useState("register");
     const [formRole, setFormRole] = useState("");
 
@@ -19,7 +21,7 @@ export default function App(){
     return(
         <>
             {showHeader && (
-                <header className="flex flex-row justify-around fixed bottom-0 left-0 w-screen border p-6">
+                <header className="flex flex-row justify-around fixed bottom-0 left-0 w-screen border p-6 bg-b400">
                     <button onClick={() => setPage("main")}>
                         Главная
                     </button>
@@ -45,7 +47,8 @@ export default function App(){
                 {page === "createtest" && <CreateTest />}
                 {page === "main" && <InformationPage />} 
                 {page === "profile" && <ProfilePage />}
-                {page === "publictest" && <PublicTests />}
+                {page === "publictest" && <PublicTests setSelectedId={setSelectedId} setPage={setPage} />}
+                {page === "taketest" && <TakeTest testId={selectedId} setPage={setPage} />}
             </main>        
         </>
     )

@@ -1,3 +1,4 @@
+from fastapi.openapi.models import Schema
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
 
@@ -40,7 +41,6 @@ class TestCreate(BaseModel):
 class OptionRead(BaseModel):
     id: int
     text: str
-    is_correct: bool
 
     model_config = {"from_attributes": True}
 
@@ -68,4 +68,17 @@ class TestRead(BaseModel):
 
     model_config = {"from_attributes": True}
 
+class AnswerSubmitCreate(BaseModel):
+    question_id: int
+    option_id: int
+
+class TestSubmitCreate(BaseModel):
+    user_id: int
+    test_id: int
+    answers: List[AnswerSubmitCreate]
+
+class ResultRead(BaseModel):
+    score: int
+    total: int
+    model_config = {"from_attributes": True}
 

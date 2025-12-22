@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
  
-export default function PublicTests() {
+export default function PublicTests({setSelectedId, setPage }) {
     const [tests, setTests] = useState([])
     const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(false)
@@ -42,7 +42,7 @@ export default function PublicTests() {
                             <h3>{test.title}</h3>
                             <p>Количество вопросов: {test.questions?.length || 0}</p>
                             <p>Автор: {test.author?.username || "Неизвестно"}</p>
-                            <button>Пройти тест</button>
+                            <button type="button" onClick={() => {setSelectedId(test.id); setPage("taketest")}}>Пройти тест</button>
                         </li>
                     ))}
                 </ul>
